@@ -37,14 +37,14 @@ local tableinsert = table.insert
 getgenv().Aiming = {
     Enabled = true,
 
-    ShowFOV = true,
+    ShowFOV = false,
     FOV = 119,
-    FOVSides = 30,
-    FOVColour = Color3fromRGB(0, 0, 255),
+    FOVSides = 300,
+    FOVColour = Color3fromRGB(0, 0, 0),
 
     VisibleCheck = true,
     
-    HitChance = 200,
+    HitChance = 100,
 
     Selected = nil,
     SelectedPart = nil,
@@ -68,8 +68,8 @@ local Aiming = getgenv().Aiming
 
 -- // Create circle
 local circle = Drawingnew("Circle")
-circle.Transparency = .5
-circle.Thickness = 0.4
+circle.Transparency = 1
+circle.Thickness = 2
 circle.Color = Aiming.FOVColour
 circle.Filled = false
 Aiming.FOVCircle = circle
@@ -318,7 +318,7 @@ function Aiming.GetClosestTargetPartToCursor(Character)
     -- // Vars
     local ClosestPart = nil
     local ClosestPartPosition = nil
-    local ClosestPartOnScreen = true
+    local ClosestPartOnScreen = false
     local ClosestPartMagnitudeFromMouse = nil
     local ShortestDistance = 1/0
 
