@@ -1,5 +1,6 @@
-if getgenv().Aiming then return getgenv().Aiming end
-
+if getgenv().Aiming 
+then return getgenv().Aiming 
+end
 -- // Services
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
@@ -39,17 +40,17 @@ getgenv().Aiming = {
 
     ShowFOV = true,
     FOV = 119,
-    FOVSides = 30,
-    FOVColour = Color3fromRGB(123, 226, 252),
-
+    FOVSides = 300,
+    FOVColour = Color3fromRGB(181.999875, 10.0000035, 255),
+   
     VisibleCheck = true,
     
-    HitChance = 100,
+    HitChance = 110,
 
     Selected = nil,
     SelectedPart = nil,
 
-    TargetPart = {"Head", "HumanoidRootPart"},
+    TargetPart = {"Head", "UpperTorso", "HumanoidRootPart", "LowerTorso"},
 
     Ignored = {
         Teams = {
@@ -60,7 +61,7 @@ getgenv().Aiming = {
         },
         Players = {
             LocalPlayer,
-            91318356, 98454320, 284188915
+            91318356
         }
     }
 }
@@ -68,8 +69,8 @@ local Aiming = getgenv().Aiming
 
 -- // Create circle
 local circle = Drawingnew("Circle")
-circle.Transparency = 0.2
-circle.Thickness = 0.2
+circle.Transparency = 1
+circle.Thickness = 2
 circle.Color = Aiming.FOVColour
 circle.Filled = false
 Aiming.FOVCircle = circle
@@ -83,8 +84,8 @@ function Aiming.UpdateFOV()
 
     -- // Set Circle Properties
     circle.Visible = Aiming.ShowFOV
-    circle.Radius = (Aiming.FOV * 3)
-    circle.Position = Vector2new(Mouse.X, Mouse.Y + GetGuiInset(GuiService).Y)
+    circle.Radius = Aiming.FOV
+    circle.Position = Vector2new(CurrentCamera.ViewportSize.X / 2, CurrentCamera.ViewportSize.Y / 2)
     circle.NumSides = Aiming.FOVSides
     circle.Color = Aiming.FOVColour
 
@@ -337,7 +338,7 @@ function Aiming.GetClosestTargetPartToCursor(Character)
         -- // Get the length between Mouse and Target Part (on screen)
         local PartPos, onScreen = WorldToViewportPoint(CurrentCamera, TargetPart.Position)
         local GuiInset = GetGuiInset(GuiService)
-        local Magnitude = (Vector2new(PartPos.X, PartPos.Y - GuiInset.Y) - Vector2new(Mouse.X, Mouse.Y)).Magnitude
+        local Magnitude = (Vector2new(PartPos.X, PartPos.Y - GuiInset.Y) - Vector2new(CurrentCamera.ViewportSize.X / 2, CurrentCamera.ViewportSize.Y / 2)).Magnitude
 
         -- //
         if (Magnitude < ShortestDistance) then
