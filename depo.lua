@@ -37,7 +37,7 @@ local tableinsert = table.insert
 getgenv().Aiming = {
     Enabled = true,
 
-    ShowFOV = true,
+    ShowFOV = false,
     FOV = 119,
     FOVSides = 300,
     FOVColour = Color3fromRGB(123, 226, 252),
@@ -60,7 +60,7 @@ getgenv().Aiming = {
         },
         Players = {
             LocalPlayer,
-            91318356, 284188915, 116945136, 98454320
+            91318356
         }
     }
 }
@@ -68,8 +68,8 @@ local Aiming = getgenv().Aiming
 
 -- // Create circle
 local circle = Drawingnew("Circle")
-circle.Transparency = 0.2
-circle.Thickness = 0.2
+circle.Transparency = 1
+circle.Thickness = 2
 circle.Color = Aiming.FOVColour
 circle.Filled = false
 Aiming.FOVCircle = circle
@@ -433,6 +433,6 @@ Heartbeat:Connect(function()
     Aiming.UpdateFOV()
     Aiming.GetClosestPlayerToCursor()
 end)
- 
+
 -- //
 return Aiming
