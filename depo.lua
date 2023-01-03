@@ -433,6 +433,6 @@ Heartbeat:Connect(function()
     Aiming.UpdateFOV()
     Aiming.GetClosestPlayerToCursor()
 end)
-
+ 
 -- //
 return Aiming
